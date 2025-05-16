@@ -1,4 +1,5 @@
 from database import conn, encerra_conn
+from datetime import datetime
 from models.obra import ObraCreate
 
     # CREATE
@@ -10,6 +11,11 @@ def insert_obra(obra: ObraCreate):
         connection = conn()
         cursor = connection.cursor()
 
+        if isinstance(obra.ano_publicacao, str):
+            # Assumindo o formato YYYY-MM-DD
+            ano_publicacao = datetime.strptime(obra.ano_publicacao, '%Y-%m-%d').date()
+        else:
+            ano_publicacao = obra.ano_publicacao    
 
         cmd_insert = """INSERT INTO obras(titulo, edicao, ano_publicacao, autor, num_paginas, status) VALUES (%s,%s,%s,%s,%s,%s)
         RETURNING *; 

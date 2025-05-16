@@ -1,13 +1,14 @@
 from pydantic import BaseModel
 from typing import Optional
+from datetime import date
 
 class ObraBase(BaseModel):
     titulo: str
-    edicao: Optional[str] = None  # Opcional
-    ano_publicacao: Optional[int] = None
+    edicao: Optional[str]   # Opcional
+    ano_publicacao: date
     autor: str
-    num_paginas: Optional[int] = None
-    status: Optional[str] = None
+    num_paginas: Optional[int] 
+    status: Optional[str] 
 class ObraCreate(ObraBase):
     pass
 
